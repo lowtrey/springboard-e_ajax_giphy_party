@@ -5,8 +5,8 @@ async function requestGif(searchTerm) {
     params: {
       api_key: "MhAodEJIJxQMxW9XqxKjyXfNYdLoOIym",
       q: searchTerm,
-      limit: 1
-    }
+      limit: 1,
+    },
   });
   const gifUrl = res.data.data[0].images.downsized_large.url;
   appendGif(gifUrl);
@@ -15,9 +15,10 @@ async function requestGif(searchTerm) {
 
 // select form and add submit listener
 const form = document.querySelector("#searchForm");
-form.addEventListener("submit", event => {
+form.addEventListener("submit", (event) => {
   event.preventDefault();
   const input = document.querySelector("#search");
+  if (!input.value) return;
   requestGif(input.value);
   input.value = "";
 });
